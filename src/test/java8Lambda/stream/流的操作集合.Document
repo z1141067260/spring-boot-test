@@ -1,0 +1,38 @@
+Intermediate(中间段、不消耗stream):
+    map(mapToInt,flatMap等): 把 input Stream 的每一个元素，映射成 output Stream 的另外一个元素。
+    flatMap: 把 input Stream 中的层级结构扁平化，就是将最底层元素抽出来放到一起，最终 output 的新 Stream 里面已经没有 List 了，都是直接的数字。
+    filter: 对原始 Stream 进行某项测试，通过测试的元素被留下来生成一个新 Stream。
+    distinct:
+    sorted:
+    peek: 对每个元素执行操作并返回一个新的 Stream
+    limit: 返回 Stream 的前面 n 个元素
+    skip: 则是扔掉前 n 个元素
+    parallel:
+    sequential:
+    unordered:
+
+Terminal(末段、消费stream):
+    forEach: 接收一个 Lambda 表达式，然后在 Stream 的每一个元素上执行该表达式。本身不能修改自己包含的本地变量值。
+    forEachOrdered:
+    toArray:
+    reduce:这个方法的主要作用是把 Stream 元素组合起来。
+        它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。
+        从这个意义上说，字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce。
+    collect:
+    min:
+    max:
+    count:
+    anyMatch:
+    allMatch:
+    noneMatch:
+    findFirst: 这是一个 termimal 兼 short-circuiting 操作，它总是返回 Stream 的第一个元素，或者空。
+    findAny:
+    iterator:
+
+Short-circuting(短循环):
+    anyMatch:
+    allMatch:
+    noneMatch:
+    findFirst: 同上
+    findAny:
+    limit:
