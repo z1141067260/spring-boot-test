@@ -1,4 +1,4 @@
-package java8Lambda.stream;
+package com.boot.test.stream;
 
 import java.util.ArrayList;
 import java.util.List;

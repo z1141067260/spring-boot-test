@@ -1,8 +1,7 @@
-package java8Lambda.stream;
+package com.boot.test.stream;
 
-import java8Lambda.common.ListUtil;
+import com.boot.test.util.ListUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
