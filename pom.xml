@@ -77,41 +77,54 @@
 
     <!-- 构建生命周期(Maven Build Lifecycle)
 
-        1、Maven的生命周期(Lifecycle)由一系列阶段（phase）构成
-            clean
-
-            prepare-resources	资源复制	可以在此阶段自定义资源复制。
-            validate	        验证信息	验证项目是否正确以及是否所有必要信息都可用。
-            compile	            compilation	源代码编译在此阶段完成。
-            Test	Testing	测试适合测试框架的已编译源代码。
-            package	packaging	此阶段创建JOM/WAR包，如POM.xml中的包装中所述。
-            install	installation	此阶段将程序包安装在本地/远程maven存储库中。
-            Deploy	Deploying	将最终包复制到远程存储库。
+        1、Maven的生命周期(Lifecycle)
+            clean               清理
+            prepare-resources	资源复制	        可以在此阶段自定义资源复制。
+            validate	        验证信息	        验证项目是否正确以及是否所有必要信息都可用。
+            compile	            compilation	    源代码编译在此阶段完成。
+            Test	            Testing	        测试适合测试框架的已编译源代码。
+            package	            packaging	    此阶段创建JOM/WAR包，如POM.xml中的包装中所述。
+            install	            installation	此阶段将程序包安装在本地/远程maven存储库中。
+            Deploy	            Deploying	    将最终包复制到远程存储库。
         2、Maven的生命周期由一系列阶段（phase）构成，以内置的生命周期default为例，它包含以下phase
-            validate
-            initialize
-            generate-sources
-            process-sources
-            generate-resources
-            process-resources
-            compile
-            process-classes
-            generate-test-sources
-            process-test-sources
+            validate                    验证项目是否正确，并且所有必要信息都可用于完成构建过程。
+            initialize                  初始化构建状态，例如set属性。
+            generate-sources            生成要包含在编译阶段的任何源代码。
+            process-sources             处理源代码，例如，过滤任何值。
+            generate-resources          生成要包含在包中的资源。
+            process-resources           将资源复制并处理到目标目录，为打包阶段做好准备。
+            compile                     编译项目的源代码。
+            process-classes             从编译中对生成的文件进行后处理，例如对Java类进行字节码增强/优化。
+            generate-test-sources       生成要包含在编译阶段的任何测试源代码。
+            process-test-sources        处理测试源代码，例如，过滤任何值。
             generate-test-resources
             process-test-resources
-            test-compile
-            process-test-classes
-            test
-            prepare-package
-            package
-            pre-integration-test
-            integration-test
-            post-integration-test
-            verify
-            install
-            deploy
+            test-compile                将测试源代码编译到测试目标目录中。
+            process-test-classes        从测试代码文件编译中处理生成的文件。
+            test                        使用合适的单元测试框架运行测试（Junit是一个）。
+            prepare-package             在实际包装之前执行准备包装所需的任何操作。
+            package                     获取已编译的代码并将其打包为可分发的格式，例如JAR，WAR或EAR文件。
+            pre-integration-test        执行集成测试之前执行所需的操作。 例如，设置所需的环境。
+            integration-test            如有必要，可以将程序包处理并部署到可以运行集成测试的环境中。
+            post-integration-test       执行集成测试后执行所需的操作。 例如，清理环境。
+            verify                      运行任何检查以验证包是否有效并符合质量标准。
+            install                     将软件包安装到本地存储库中，该存储库可以在本地用作其他项目的依赖项。
+            deploy                      将最终包复制到远程存储库以与其他开发人员和项目共享。
      -->
+
+    <!--
+     当我们执行Maven构建命令时，Maven开始按以下顺序查找依赖库 -
+        Step 1 - 在本地存储库中搜索依赖关系，如果未找到，则转到步骤2，否则执行进一步处理。
+        Step 2 - 在中央存储库中搜索依赖关系，如果未找到，则提及远程存储库/存储库，然后转到步骤4.否则，将其下载到本地存储库以供将来参考。
+        Step 3 - 如果没有提到远程存储库，Maven只是停止处理并抛出错误（无法找到依赖关系）。
+        Step 4 - 在远程存储库或存储库中搜索依赖关系，如果找到，则将其下载到本地存储库以供将来参考。 否则，Maven停止处理并抛出错误（无法找到依赖项）。
+     -->
+    <repositories>
+        <repository>
+            <id>companyname.lib1</id>
+            <url>http://download.companyname.org/maven2/lib1</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
