@@ -1,9 +1,5 @@
 package com.boot.test.util;
 
-import com.boot.test.alipay.request.open.QrcodeRequest;
-import com.boot.test.alipay.request.system.OauthRequest;
-import com.boot.test.model.userBean;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,26 +39,26 @@ public class ListUtil {
         return IntList;
     }
 
-    public static List<userBean> getUserBeanList(){
-        List<userBean> list = new ArrayList<>();
-        list.add(new userBean(1, "张三", "20"));
-        list.add(new userBean(2, "李四", "21"));
-        list.add(new userBean(3, "王五", "22"));
-        list.add(new userBean(4, "神六", "23"));
-        return list;
-    }
-
-    public static List<Map<String, Object>> getHashMapList(){
-        List<Map<String, Object>> list = new ArrayList<>();
-        list.add(MapUtil.getMap(1, "张三", "20"));
-        list.add(MapUtil.getMap(2, "李四", "21"));
-        list.add(MapUtil.getMap(3, "王五", "22"));
-        list.add(MapUtil.getMap(4, "神六", "23"));
-        return list;
-    }
-
-    public static void main(String[] args) {
-        OauthRequest oauthRequest =new OauthRequest();
-        oauthRequest.getToken("sdfdf");
-    }
+//    public static List<userBean> getUserBeanList(){
+//        List<userBean> list = new ArrayList<>();
+//        list.add(new userBean(1, "张三", "20"));
+//        list.add(new userBean(2, "李四", "21"));
+//        list.add(new userBean(3, "王五", "22"));
+//        list.add(new userBean(4, "神六", "23"));
+//        return list;
+//    }
+//
+//    public static List<Map<String, Object>> getHashMapList(){
+//        List<Map<String, Object>> list = new ArrayList<>();
+//        list.add(MapUtil.getMap(1, "张三", "20"));
+//        list.add(MapUtil.getMap(2, "李四", "21"));
+//        list.add(MapUtil.getMap(3, "王五", "22"));
+//        list.add(MapUtil.getMap(4, "神六", "23"));
+//        return list;
+//    }
+//
+//    public static void main(String[] args) {
+//        OauthRequest oauthRequest =new OauthRequest();
+//        oauthRequest.getToken("sdfdf");
+//    }
 }

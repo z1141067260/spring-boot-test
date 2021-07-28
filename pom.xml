@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Maven的作用
+    1、提供了一套标准化的项目结构
+    2、提供了一套标准化的构建流程（编译，测试，打包，发布……）
+    3、提供了一套依赖管理机制
+ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--声明项目描述符遵循哪一个POM模型版本。模型本身的版本很少改变，虽然如此，但它仍然是必不可少的，这是为了当Maven引入了新的特性或者其他模型变更的时候，确保稳定性。 -->
     <modelVersion>4.0.0</modelVersion>
+
+    <!--g:项目的全球唯一标识符，通常使用全限定的包名区分该项目和其他项目。并且构建时生成的路径也是由此生成， 如com.myhome.app生成的相对路径为：/com/myhome/app -->
+    <!-- a:构件的标识符，它和group ID一起唯一标识一个构件。换句话说，你不能有两个不同的项目拥有同样的artifact ID和groupID；在某个特定的group ID下，artifact ID也必须是唯一的。构件是项目产生的或使用的一个东西，Maven为项目产生的构件包括：JARs，源 码，二进制发布和WARs等。 -->
+    <!--v:项目当前版本，格式为:主版本.次版本.增量版本-限定版本号 -->
+    <!--gav可以唯一确定一个maven项目,我们在引用其他第三方库的时候，也是通过这3个变量确定。-->
+    <groupId>com.boot</groupId>
+    <artifactId>spring-boot-test</artifactId>
+    <!-- Maven通过对jar包进行PGP签名确保任何一个jar包一经发布就无法修改。修改已发布jar包的唯一方法是发布一个新版本。
+    注：只有以-SNAPSHOT结尾的版本号会被Maven视为开发版本，开发版本每次都会重复下载，这种SNAPSHOT版本只能用于内部私有的Maven repo，公开发布的版本不允许出现SNAPSHOT。-->
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-boot-test</name>
+    <description>Test project for Spring Boot</description>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.boot</groupId>
-    <artifactId>spring-boot-test</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-test</name>
-    <description>Test project for Spring Boot</description>
+
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.33.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -28,6 +50,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- scope类型:
+            compile	编译时需要用到该jar包（默认）	commons-logging
+            test	编译Test时需要用到该jar包	junit
+            runtime	编译时不需要，但运行时需要用到	mysql
+            provided	编译时需要用到，但运行时由JDK或某个服务器提供	servlet-api
+         -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -46,6 +74,45 @@
         </dependency>
     </dependencies>
 
+
+    <!-- 构建生命周期(Maven Build Lifecycle)
+
+        1、Maven的生命周期(Lifecycle)由一系列阶段（phase）构成
+            clean
+
+            prepare-resources	资源复制	可以在此阶段自定义资源复制。
+            validate	        验证信息	验证项目是否正确以及是否所有必要信息都可用。
+            compile	            compilation	源代码编译在此阶段完成。
+            Test	Testing	测试适合测试框架的已编译源代码。
+            package	packaging	此阶段创建JOM/WAR包，如POM.xml中的包装中所述。
+            install	installation	此阶段将程序包安装在本地/远程maven存储库中。
+            Deploy	Deploying	将最终包复制到远程存储库。
+        2、Maven的生命周期由一系列阶段（phase）构成，以内置的生命周期default为例，它包含以下phase
+            validate
+            initialize
+            generate-sources
+            process-sources
+            generate-resources
+            process-resources
+            compile
+            process-classes
+            generate-test-sources
+            process-test-sources
+            generate-test-resources
+            process-test-resources
+            test-compile
+            process-test-classes
+            test
+            prepare-package
+            package
+            pre-integration-test
+            integration-test
+            post-integration-test
+            verify
+            install
+            deploy
+     -->
+
     <build>
         <plugins>
             <plugin>
@@ -56,3 +123,11 @@
     </build>
 
 </project>
+
+<!--
+ 原文摘要
+ Maven wiki链接：http://www.zzbaike.com/wiki/Maven
+ MAVEN基础：https://www.liaoxuefeng.com/wiki/1252599548343744/1255945359327200
+ 链接：https://blog.csdn.net/weixin_40235225/article/details/84993520
+
+ -->
