@@ -1,4 +1,4 @@
-package com.boot.test.stream;
+package java8Lambda.stream;
 
 
 import com.boot.test.util.ListUtil;
